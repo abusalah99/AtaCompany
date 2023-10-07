@@ -1,0 +1,95 @@
+﻿@page "/"
+
+@inject NavigationManager NavigationManager
+
+@inherits AutoCompeletSearchBar<Location>
+
+<PopUp Title="@popUpTitle">
+    <FromContent>
+        <EditForm class="input-form" Model="request" OnSubmit="HandelFormAction">
+            @if (@popUpTitle != "حذف موقع")
+            {
+                <div class="form-group col-12">
+                    <label class="text-light m-1" for="inputName">اسم العميل</label>
+                    <InputText @bind-Value="request.CustomerName" class="form-control m-1" id="inputName" placeholder="اسم العميل"></InputText>
+                </div>
+                <div class="form-group col-12 m-1">
+                    <label class="text-light m-1" for="inputAddress">عنوان الموقع</label>
+                    <InputText @bind-Value="request.Address" class="form-control m-1" id="inputAddress" placeholder="عنوان الموقع"></InputText>
+                </div>
+                <div class="form-group col-12 m-1">
+                    <label class="text-light m-1" for="inputImage">صورة الموقع</label>
+                    <InputFile OnChange="@HandleFileUpload" class="form-control m-1" id="inputImage" />
+                </div>
+                <style>
+                    .input-form {
+                        display: flex;
+                        justify-content: end;
+                        flex-direction: column;
+                        width: 80%;
+                    }
+
+                    .form-group {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: end;
+                    }
+
+                    .form-button {
+                        
+                    }
+
+                    .form-control {
+                        direction: rtl;
+                    }
+                </style>
+            }
+            else
+            {
+                <div class="form-group col-12">
+                    <h3 class="text-light m-4 text-center" for="inputName">هل انت متاكد انك تريد حذف الموقع</h3>
+                </div>
+            }
+            <div class="form-button" style="display: flex; width: 100%; align-items: center; justify-content: center;padding-top: 5px;">
+                <button type="submit" class="btn btn-primary">@popUpTitle</button>
+            </div>
+        </EditForm>
+    </FromContent>
+</PopUp>
+
+<div class="bar">
+    <div class="autocomplete w-50 ">
+        <AutoCompeletSearchBar Entities="@locations" TEntity="Location" />
+
+    </div>
+    <button type="button" @onclick="()=>TogglePopUpVisibilityForCreate()" class="btn btn-primary">أضافة موقع</button>
+</div>
+
+<div class="cont">
+
+    @if (!_searchParameters.Suggestions.Any() && !string.IsNullOrWhiteSpace(_searchParameters.SearchText))
+        renderLocations = _searchParameters.FilteredItems;
+    else
+        renderLocations = locations;
+
+    @foreach (Location location in renderLocations)
+    {
+        <div class="card">
+            <div class="card-controle">
+                <span class="material-symbols-outlined" @onclick="(()=>TogglePopUpVisibilityForEdit(location))">
+                    edit
+                </span>
+                <button type="button" @onclick="()=>TogglePopUpVisibilityForDelete(location)" class="btn-close"></button>
+            </div>
+            <a href="/location/@location.Id">
+                <img class="card-img-top img-fluid w-md-30 w-sm-47 overflow-hidden"
+                     src="@($"{NavigationManager.BaseUri}{location.ImagePath}")"
+                     alt="location" loading="lazy">
+            </a>
+            <div class="card-body text-center">
+                <a href="/location/@location.Id"><h5 class="card-title">@location.Name</h5></a>
+                <p class="card-text">@location.Address</p>
+            </div>
+        </div>
+    }
+</div>

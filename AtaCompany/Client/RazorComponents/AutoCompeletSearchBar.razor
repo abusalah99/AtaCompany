@@ -1,0 +1,34 @@
+﻿@typeparam TEntity
+
+<ul class="options">
+
+    <li>
+        <input
+        @bind="_searchParameters.SearchText"
+        @oninput="HandleSearch"
+        @onkeydown="HandleArrowKeyNavigation"
+        @onfocus="HandleFoucus"
+        @onblur="HandleBlur"
+               class="form-control m-0 w-100" placeholder="اسم العميل" />
+    </li>
+
+    @if (_searchParameters.Suggestions is not null && isInputFocused)
+    {
+
+        @if (_searchParameters.Suggestions.Any())
+        {
+            @foreach (var suggestion in _searchParameters.Suggestions.Take(10).Select((s, index) => new { Index = index, Suggestion = s }))
+            {
+                <li class="@GetSuggestionItemClass(suggestion.Index)" @onclick="(() => HandleSuggetionClick(suggestion.Suggestion.Name))">
+                    <span class="option-text">@suggestion.Suggestion.Name</span>
+                </li>
+            }
+
+        }
+        else if (!string.IsNullOrWhiteSpace(_searchParameters.SearchText) && !_searchParameters.FilteredItems.Any())
+        {
+            <li class="disabled option">لا يوجد موقع لهذا العميل</li>
+        }
+
+    }
+</ul>

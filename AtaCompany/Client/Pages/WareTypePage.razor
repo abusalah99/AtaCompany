@@ -1,0 +1,17 @@
+﻿@page "/location/{id:guid}/wares"
+
+<div class="cont">
+    @foreach (var wareType in wareTypes)
+    {
+        <div class="card">
+            <div class="card-body text-center">
+                <a href="/Location/@Id/wares/@wareType.Id"><h4 class="card-title">@wareType.Name</h4></a>
+            </div>
+            <a href="/Location/@Id/wares/@wareType.Id">
+                <img class="card-img-bottom border-top border-dark img-fluid w-md-30 w-sm-47 overflow-hidden"
+                     src="/Images/Wares/@(wareType.Name).png"
+                     alt="location" loading="lazy">
+            </a>
+        </div>
+    }
+</div>

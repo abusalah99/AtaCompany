@@ -1,0 +1,13 @@
+﻿.collapsable {
+    display: flex;
+
+    justify-content: center;
+}
+
+.collapsable .title
+{
+    padding:5px;
+}
+h5{
+    padding:5px;
+}

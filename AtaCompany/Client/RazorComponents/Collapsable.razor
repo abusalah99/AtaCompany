@@ -1,0 +1,13 @@
+﻿<div class="collapsable text-light">
+
+    <div class="value">
+        <span @onclick="Toggle" class="btn text-light">@Value</span>
+    </div>
+
+</div>
+@if (!Collapsed)
+{
+    <div class="container">
+        @ChildContent
+    </div>
+}

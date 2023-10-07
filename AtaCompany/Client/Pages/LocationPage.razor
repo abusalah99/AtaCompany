@@ -1,0 +1,20 @@
+﻿@page "/location/{id:guid}"
+
+<div class="cont">
+    @foreach (var item in items)
+    {
+        <div class="card">
+            <div class="card-body text-center">
+                <a href="/location/@Id/@item.Name"><h4 class="card-title">@item.ArabicName</h4></a>
+            </div>
+
+            <a href="/location/@Id/@item.Name">
+                <img class="card-img-bottom img-fluid w-md-30 w-sm-47 overflow-hidden"
+                     src="Images/Locations/@(item.Name).png"
+                     alt="location" loading="lazy">
+            </a>
+
+        </div>
+    }
+</div>
+

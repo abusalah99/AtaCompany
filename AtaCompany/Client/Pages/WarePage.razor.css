@@ -1,0 +1,25 @@
+﻿.material-symbols-outlined {
+    color: white;
+}
+    .material-symbols-outlined:hover {
+        color: green;
+    }
+.delete:hover{
+    color:darkred;
+}
+.small-screen{
+    display:none;
+}
+large-screen {
+    display:table;
+}
+@media (max-width: 992px) {
+    .small-screen {
+        display:table;
+    }
+
+    .large-screen {
+        display: none;
+    }
+}
+

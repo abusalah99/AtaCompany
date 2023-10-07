@@ -1,0 +1,35 @@
+﻿.cont {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    min-height:calc(100vh - 70px - 17.6px) ;
+}
+
+.card {
+    width: 17%;
+    margin: 1vw;
+}
+
+    .card a {
+        text-decoration: none;
+    }
+
+    .card img {
+        height: 18vw;
+    }
+
+.card-body h4 {
+    color: #191970;
+}
+
+@media (max-width: 750px) {
+    .card {
+        width: 47%;
+    }
+
+        .card img {
+            height: 45vw;
+        }
+}
