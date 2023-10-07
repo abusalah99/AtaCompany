@@ -37,7 +37,7 @@
                     <label class="text-light m-1" for="Penalty">احمالي الخصومات</label>
                     <InputText @bind-Value="request.Penalty" class="form-control m-1" placeholder="احمالي الخصومات" id="Penalty" />
                 </div>
-                <div style="display:flex">
+    @*             <div style="display:flex">
                     <div class="form-group col-6 m-1">
                         <label class="text-light m-1" for="PaymentDate">تاريخ الدفع</label>
                         <InputDate @bind-Value="request.Payment.PaymentDate" class="form-control m-1" id="PaymentDate" />
@@ -46,7 +46,7 @@
                         <label class="text-light m-1" for="PaidMoney">احمالي المدفوع</label>
                         <InputText @bind-Value="request.Payment.PaidMoney" class="form-control m-1" placeholder="احمالي المدفوع" id="PaidMoney" />
                     </div>
-                </div>
+                </div> *@
                 <style>
                     .input-form {
                         display: flex;
@@ -137,14 +137,14 @@
                                         <td class="text-center">@contractor.Penalty</td>
                                         <th scope="col" class="text-center">اجمالي الخصومات</th>
                                     </tr>
-                                    <tr>
+                          @*           <tr>
                                         <td class="text-center">@contractor.Payment.PaidMoney</td>
                                         <th scope="col" class="text-center">اجمالي المدفوع</th>
-                                    </tr>
-                                    <tr>
+                                    </tr> *@
+               @*                      <tr>
                                         <td class="text-center">@contractor.Payment.PaymentDate</td>
                                         <th scope="col" class="text-center">تاريخ الدفع</th>
-                                    </tr>
+                                    </tr> *@
                                 </tbody>
                             </table>
                         </Collapsable>

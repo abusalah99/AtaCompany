@@ -9,7 +9,7 @@ public class WareConfiguration : BaseConfigurationSetting<Ware>
         builder.Property(e => e.Quantity).IsRequired();
         builder.Property(e => e.Price).IsRequired();
         builder.Property(e => e.Note).IsRequired().HasMaxLength(100);
-        builder.Property(e => e.EntranceDate).IsRequired();
+        builder.Property(e => e.EntranceDate).IsRequired().HasDefaultValueSql("GETDATE()");
     }
 }
 
