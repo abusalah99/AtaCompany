@@ -9,6 +9,8 @@ public class ContractorController : BaseControllerSetting<Contractor>
 
     public ContractorController(IContractorUnitOfWork unitOfWork) : base(unitOfWork) =>  _unitOfWork = unitOfWork;
 
+    [HttpGet]
+    public async Task<IActionResult> Get() => await ReadAsync();
     [HttpGet("{locationId}")]
     public async Task<IActionResult> Get(Guid locationId)
         => Ok(await _unitOfWork.GetContractorsForLocation(locationId));

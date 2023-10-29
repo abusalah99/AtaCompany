@@ -1,4 +1,4 @@
-﻿/*namespace AtaCompany;
+﻿namespace AtaCompany;
 
 public class GlobalErrorHandlerMiddleware : IMiddleware
 {
@@ -18,22 +18,10 @@ public class GlobalErrorHandlerMiddleware : IMiddleware
         {
             _logger.LogError(exception.Message);
 
-            ResponseResult result = new ResponseResult(exception);
-
-            await HandleExceptionAsync(context, result);
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 500;
+            string error = JsonSerializer.Serialize(new { ErrorMessage = exception.Message });
+            await context.Response.WriteAsync(error);
         }
-
     }
-
-    private async Task HandleExceptionAsync(HttpContext context, ResponseResult result)
-    {
-        string response = JsonSerializer.Serialize(result);
-
-
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = 500;
-        await context.Response.WriteAsync(response);
-    }
-
 }
-*/

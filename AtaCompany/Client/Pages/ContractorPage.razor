@@ -1,4 +1,5 @@
-﻿@page "/location/{LocationId:guid}/contractors"
+﻿@page "/contractors"
+
 <PopUp Title="@popUpTitle">
     <FromContent>
         <EditForm class="input-form" Model="request" OnSubmit="HandelFormAction">
@@ -13,10 +14,6 @@
                     <InputText @bind-Value="request.NationalId" class="form-control m-1" id="NationalId" placeholder="الرقم القومي" />
                 </div>
                 <div class="form-group col-12 m-1">
-                    <label class="text-light m-1" for="inputAddress">تاريخ التعاقد</label>
-                    <InputDate @bind-Value="request.DealDate" class="form-control m-1" id="inputAddress" />
-                </div>
-                <div class="form-group col-12 m-1">
                     <label class="text-light m-1" for="WareType">البند</label>
                     <InputSelect @bind-Value="request.WareTypeId" class="form-control m-1" id="WareType" placeholder="البند">
                         @foreach (var ware in wareTypes)
@@ -25,28 +22,6 @@
                         }
                     </InputSelect>
                 </div>
-                <div class="form-group col-12 m-1">
-                    <label class="text-light m-1" for="DealType">نوع الاتفاق</label>
-                    <InputText @bind-Value="request.DealType" class="form-control m-1" id="DealType" placeholder="نوع الاتفاق" />
-                </div>
-                <div class="form-group col-12 m-1">
-                    <label class="text-light m-1" for="DealBudget">احمالي المستخلص</label>
-                    <InputText @bind-Value="request.DealBudget" class="form-control m-1" placeholder="احمالي المستخلص" id="DealBudget" />
-                </div>
-                <div class="form-group col-12 m-1">
-                    <label class="text-light m-1" for="Penalty">احمالي الخصومات</label>
-                    <InputText @bind-Value="request.Penalty" class="form-control m-1" placeholder="احمالي الخصومات" id="Penalty" />
-                </div>
-    @*             <div style="display:flex">
-                    <div class="form-group col-6 m-1">
-                        <label class="text-light m-1" for="PaymentDate">تاريخ الدفع</label>
-                        <InputDate @bind-Value="request.Payment.PaymentDate" class="form-control m-1" id="PaymentDate" />
-                    </div>
-                    <div class="form-group col-6 m-1">
-                        <label class="text-light m-1" for="PaidMoney">احمالي المدفوع</label>
-                        <InputText @bind-Value="request.Payment.PaidMoney" class="form-control m-1" placeholder="احمالي المدفوع" id="PaidMoney" />
-                    </div>
-                </div> *@
                 <style>
                     .input-form {
                         display: flex;
@@ -118,33 +93,9 @@
                                         <th scope="col" class="text-center">الرقم المقومي</th>
                                     </tr>
                                     <tr>
-                                        <td class="text-center">@contractor.DealDate</td>
-                                        <th scope="col" class="text-center">تاريخ التعاقد</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">@contractor.WareType.Name</td>
+                                        <td class="text-center">@contractor.WareType!.Name</td>
                                         <th scope="col" class="text-center">البند</th>
                                     </tr>
-                                    <tr>
-                                        <td class="text-center">@contractor.DealType</td>
-                                        <th scope="col" class="text-center">نوع الاتفاق</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">@contractor.DealBudget</td>
-                                        <th scope="col" class="text-center">اجمالى المستخلص</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">@contractor.Penalty</td>
-                                        <th scope="col" class="text-center">اجمالي الخصومات</th>
-                                    </tr>
-                          @*           <tr>
-                                        <td class="text-center">@contractor.Payment.PaidMoney</td>
-                                        <th scope="col" class="text-center">اجمالي المدفوع</th>
-                                    </tr> *@
-               @*                      <tr>
-                                        <td class="text-center">@contractor.Payment.PaymentDate</td>
-                                        <th scope="col" class="text-center">تاريخ الدفع</th>
-                                    </tr> *@
                                 </tbody>
                             </table>
                         </Collapsable>
@@ -154,48 +105,4 @@
             }
         </tbody>
     </table>
-
-    @* <table class="table text-light large-screen">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">
-                    <span class="material-symbols-outlined btn" @onclick="TogglePopUpVisibilityForCreate">
-                        add
-                    </span>
-                </th>
-                <th></th>
-                <th scope="col" class="text-center">تاريخ الخروج</th>
-                <th scope="col" class="text-center">تاريخ الدخول</th>
-                <th scope="col" class="text-center">الملاحظات</th>
-                <th scope="col" class="text-center">سعر القطعة</th>
-                <th scope="col" class="text-center">الكمية</th>
-                <th scope="col" class="text-center">الاسم</th>
-                <th scope="col" class="text-center">#</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var contractor in contractors)
-            {
-                <tr>
-                    <td class="text-center" style="width:10px;">
-                        <span class="material-symbols-outlined btn delete" @onclick="(()=>TogglePopUpVisibilityForDelete(ware.Id))">
-                            delete
-                        </span>
-                    </td>
-                    <td class="text-center" style="width:10px;">
-                        <span class="material-symbols-outlined btn" @onclick="(()=>TogglePopUpVisibilityForEdit(ware))">
-                            edit
-                        </span>
-                    </td>
-                    <td class="text-center" style="width:120px;">@ware.DepartureDate</td>
-                    <td class="text-center" style="width:120px;">@ware.EntranceDate</td>
-                    <td class="text-center" style="width:200px;">@ware.Note</td>
-                    <td class="text-center">@ware.Price</td>
-                    <td class="text-center">@ware.Quantity</td>
-                    <td class="text-center">@ware.Name</td>
-                    <th scope="row" class="text-center">@((wares.IndexOf(ware)) + 1)</th>
-                </tr>
-            }
-        </tbody>
-    </table> *@
 </div>

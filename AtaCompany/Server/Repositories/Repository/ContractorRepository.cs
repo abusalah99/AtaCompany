@@ -4,6 +4,10 @@ public class ContractorRepository : BaseRepositorySetting<Contractor>, IContract
 {
     public ContractorRepository(ApplicationDbContext context) : base(context) { }
 
+    public override async Task<IEnumerable<Contractor>> Get() => await dbSet.AsSplitQuery()
+                                                                            .Include(e=>e.WareType)
+                                                                            .ToListAsync();
+
     public async Task<IEnumerable<Contractor>> GetContractorsForLocation(Guid locationId)
         => await dbSet.Where(e => e.LocationContracts != null && e.LocationContracts
                       .Any(e => e.LocationId == locationId))

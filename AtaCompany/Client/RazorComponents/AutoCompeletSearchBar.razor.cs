@@ -20,9 +20,9 @@ public partial class AutoCompeletSearchBar<TEntity> : IDisposable where TEntity 
     {
         base.OnInitialized();
 
-        _searchParameters.OnFilteredLocationsChanged += HandleFilteredLocationsChanged;
-        _searchParameters.OnSuggestionsChanged += HandleSuggestionsChanged;
-        _searchParameters.OnSearchTextChanged += HandleSearchTextChanged;
+        _searchParameters.OnFilteredLocationsChanged += HandleFilteredLocationsChanged!;
+        _searchParameters.OnSuggestionsChanged += HandleSuggestionsChanged!;
+        _searchParameters.OnSearchTextChanged += HandleSearchTextChanged!;
     }
 
     private async Task HandleSearch(ChangeEventArgs e)
@@ -124,9 +124,9 @@ public partial class AutoCompeletSearchBar<TEntity> : IDisposable where TEntity 
 
     public void Dispose()
     {
-        _searchParameters.OnFilteredLocationsChanged -= HandleFilteredLocationsChanged;
-        _searchParameters.OnSuggestionsChanged -= HandleSuggestionsChanged;
-        _searchParameters.OnSearchTextChanged -= HandleSearchTextChanged;
+        _searchParameters.OnFilteredLocationsChanged -= HandleFilteredLocationsChanged!;
+        _searchParameters.OnSuggestionsChanged -= HandleSuggestionsChanged!;
+        _searchParameters.OnSearchTextChanged -= HandleSearchTextChanged!;
     }
 
     protected void HandleFilteredLocationsChanged(object sender, EventArgs e) => StateHasChanged();
